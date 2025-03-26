@@ -80,38 +80,38 @@ export default function AccountPage() {
       <div className="w-full max-w-md ">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800">My account</h1>
-          <Link href="/">
-            <button className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700">
-              Logout
-            </button>
-          </Link>
         </div>
 
         {session ? (
-          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
-            <p className="text-xl mb-6">
-              Welcome back,{" "}
-              <span className="font-semibold">{session.username}</span>!
-            </p>
-
+          <div className="bg-white shadow-md border p-6">
             {account ? (
               <div className="space-y-6 ">
-                <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex justify-between">
+                  <p className="text-xl mb-6">
+                    Welcome back,{" "}
+                    <span className="font-semibold">{session.username}</span>!
+                  </p>{" "}
+                  <Link href="/">
+                    <button className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700">
+                      Logout
+                    </button>
+                  </Link>
+                </div>
+                <div className="bg-blue-50  p-4 border border-blue-100">
                   <h2 className="text-lg font-medium text-gray-800 mb-3">
                     Account details:
                   </h2>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-600">User-ID:</span>
+                    <span>User-ID:</span>
                     <span className="font-medium">{account.id}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Saldo:</span>
+                    <span>Saldo:</span>
                     <span className="text-xl font-bold text-green-700">
                       {account.amount} SEK
                     </span>
                   </div>
                 </div>
-
                 <div className="border-t border-gray-200 pt-6">
                   <h3 className="text-lg font-medium text-gray-800 mb-4">
                     Do a deposit
@@ -120,12 +120,12 @@ export default function AccountPage() {
                     <input
                       value={depositAmount}
                       type="number"
-                      className="w-full p-3 border border-gray-300 rounded-lg"
+                      className="w-full p-3 border border-gray-300"
                       onChange={(e) => setDepositAmount(e.target.value)}
                     />
                     <button
                       onClick={handleDeposit}
-                      className="w-full bg-yellow-500 hover:bg-amber-500 p-3 text-white font-semibold rounded-lg"
+                      className="w-full bg-yellow-500 hover:bg-amber-500 p-3 text-black font-semibold "
                     >
                       Deposit
                     </button>
@@ -133,8 +133,15 @@ export default function AccountPage() {
                 </div>
               </div>
             ) : (
-              <div className="text-center py-10">
-                <p className="text-gray-600">Loading...</p>
+              <div className=" flex flex-col justify-center items-center gap-5 text-center ">
+                <p className="text-gray-600">
+                  Invalid username or passqord, try again!
+                </p>
+                <Link href="/login">
+                  <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                    Login
+                  </button>
+                </Link>
               </div>
             )}
           </div>
