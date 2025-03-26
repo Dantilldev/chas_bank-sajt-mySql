@@ -10,6 +10,7 @@ export default function AccountPage() {
   const [depositAmount, setDepositAmount] = useState(0);
 
   async function getAccount() {
+    // om session inte finns eller token inte finns, loggar error och returnerar
     if (!session || !session.token) {
       console.log("No session token found");
       return;
@@ -21,14 +22,14 @@ export default function AccountPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({token: session.token}), // Send token in the request body
+        body: JSON.stringify({token: session.token}), // skickar token i request body
       });
-
+      //  om inte ok, logga error och returnera
       if (!response.ok) {
         console.log("Error fetching account", response.statusText);
         return;
       }
-
+      // om ok, sätt account till data
       const data = await response.json();
       setAccount(data);
       console.log("Account data: ", data);
@@ -38,6 +39,7 @@ export default function AccountPage() {
   }
 
   async function handleDeposit() {
+    // Om depositAmount är mindre än eller lika med 0, logga error och returnera
     if (depositAmount <= 0) {
       console.log("Invalid deposit amount");
       return;
@@ -71,11 +73,7 @@ export default function AccountPage() {
 
   useEffect(() => {
     getAccount();
-  }, [session]); // Re-fetch account info if session changes
-
-  // useEffect(() => {
-  //   handleDeposit();
-  // }, [session]); // Re-fetch account info if session changes
+  }, [session]); // körs när session ändras
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
