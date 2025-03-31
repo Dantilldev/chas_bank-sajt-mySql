@@ -31,7 +31,8 @@ function generateOTP() {
 }
 
 // Din kod här. Skriv dina arrayer
-
+// let users = [];
+// let accounts = [];
 let sessions = [];
 
 // Route för att lägga till en användare - create inserst med SQL
